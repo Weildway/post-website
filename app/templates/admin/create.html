@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Main page{% endblock %}
+
+{% block content %}
+  {{ super() }}
+    <div class="container">
+        <form class="form-signin" action="{{ url_for('create') }}" method="POST">
+            <h2 class="text-center"> Create new order </h2>
+            {{ form.hidden_tag() }}
+            {{ wtf.form_field(form.sender) }}
+            {{ wtf.form_field(form.receiver) }}
+
+            {{ wtf.form_field(form.sender_index) }}
+            {{ wtf.form_field(form.receiver_index) }}
+
+            {{ wtf.form_field(form.sender_addr) }}
+            {{ wtf.form_field(form.receiver_addr) }}
+
+            {{ wtf.form_field(form.pkg_name) }}
+            {{ wtf.form_field(form.submit_button, class = "btn btn-primary") }}
+            <hr/>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == "error" %}
+                        <p class="text-center" style="color:red;">{{message}}</p>
+                    {% else %}
+                        <p class="text-center">{{message}}</p>
+                    {% endif %}
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+{% endblock %}

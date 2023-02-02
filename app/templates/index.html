@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Main page{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  <div class="container">
+      {% if session.get("user_id") %}
+          <h1> Welcome {{session["username"]}} </h1>
+          {% if session["is_admin"] %}
+              <h3> Users: {{total_users}}</h3>
+              <h3> Orders: {{total_orders}}</h3>
+              <h3> Delivered orders: {{delivered_orders}}</h3>
+          {% endif %}
+      {% endif %}
+    </div>
+{% endblock %}

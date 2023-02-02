@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Main page{% endblock %}
+
+{% block content %}
+  {{ super() }}
+    <div class="container">
+        {% if order %}
+        <h3 class="text-center">Order information for <b>{{ order['track'] }}</b></h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>From addr</th>
+                    <th>To addr</th>
+                    <th>From index</th>
+                    <th>To index</th>
+                    <th>Send date</th>
+                    <th>Updated</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ order['sender'] }}</td>
+                    <td>{{ order['receiver'] }}</td>
+                    <td>{{ order['sender_addr'] }}</td>
+                    <td>{{ order['receiver_addr'] }}</td>
+                    <td>{{ order['sender_index'] }}</td>
+                    <td>{{ order['receiver_index'] }}</td>
+                    <td>{{ order['send_date'] }}</td>
+                    <td>{{ order['update_time'] }}</td>
+                    <td>{{ order['pkg_status'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% else %}
+        <h3 class="text-center">Enter your tracking code to get detailed information</h3>
+            <form class="form-signin" action="{{ url_for('track') }}" method="POST">
+                {{ form.hidden_tag() }}
+                {{ wtf.form_field(form.order_code) }}
+                {{ wtf.form_field(form.submit_button, class = "btn btn-primary") }}
+                <hr/>
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                {% if category == "error" %}
+                    <p class="text-center" style="color:red;">{{message}}</p>
+                {% else %}
+                    <p class="text-center">{{message}}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

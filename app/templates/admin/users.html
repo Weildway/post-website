@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Main page{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  <div class="container">
+        <h2 class="text-center"> List of registered users </h2>
+        <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>Username</th>
+                  <th>Register date</th>
+                  <th>Number of packages sent</th>
+                  <th>Last postage date</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for user in users %}
+              <tr>
+                  <td>{{ user['username'] }}</td>
+                  <td>{{ user['register_date'] }}</td>
+                  <td>{{ user['packages'] }}</td>
+                  <td>{{ user['last_pkg'] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+{% endblock %}

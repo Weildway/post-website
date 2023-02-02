@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Main page{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  <div class="container">
+        <h2 class="text-center"> List of packages </h2>
+        <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>Track</th>
+                  <th>Sender</th>
+                  <th>Receiver</th>
+                  <th>From index</th>
+                  <th>To index</th>
+                  <th>From addr</th>
+                  <th>To addr</th>
+                  <th>Send date</th>
+                  <th>Updated</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for order in orders %}
+              <tr>
+                  <td>
+                    <a href="/admin/order/{{ order['track'] }}" />{{ order['track'] }}</a>
+                  </td>
+                  <td>{{ order['sender'] }}</td>
+                  <td>{{ order['receiver'] }}</td>
+                  <td>{{ order['sender_index'] }}</td>
+                  <td>{{ order['receiver_index'] }}</td>
+                  <td>{{ order['sender_addr'] }}</td>
+                  <td>{{ order['receiver_addr'] }}</td>
+                  <td>{{ order['send_date'] }}</td>
+                  <td>{{ order['update_time'] }}</td>
+                  <td>{{ order['pkg_status'] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+{% endblock %}

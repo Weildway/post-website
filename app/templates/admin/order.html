@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Main page{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  <div class="container">
+        <h2 class="text-center"> Update package info for <b>{{ track }}</b></h2>
+        <br>
+        <form class="form-signin" action="{{ url_for('order', track=track) }}" method="POST">
+        <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>Sender</th>
+                  <th>Receiver</th>
+                  <th>From index</th>
+                  <th>To index</th>
+                  <th>From addr</th>
+                  <th>To addr</th>
+                  <th>Package name</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>{{ wtf.form_field(form.sender) }}</td>
+                  <td>{{ wtf.form_field(form.receiver) }}</td>
+                  <td>{{ wtf.form_field(form.sender_index) }}</td>
+                  <td>{{ wtf.form_field(form.receiver_index) }}</td>
+                  <td>{{ wtf.form_field(form.sender_addr) }}</td>
+                  <td>{{ wtf.form_field(form.receiver_addr) }}</td>
+                  <td>{{ wtf.form_field(form.pkg_name) }}</td>
+                  <td>{{ wtf.form_field(form.pkg_status) }}</td>
+              </tr>
+          </tbody>
+        </table>
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.submit_button, class = "btn btn-primary") }}
+      </form>
+      </div>
+{% endblock %}
